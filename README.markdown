@@ -46,7 +46,7 @@ Windows標準のエンコーディングはShift-JISですし、小説とか日�
         
 2. peepsの準備
     1. ダウンロード
-        * [ここ](https://bitbucket.org/subaru45/peeps)から`peeps_v1.0.zip`をダウンロードして解凍する。
+        * [ここ](https://bitbucket.org/subaru45/peeps/downloads/peeps_v1.0.zip)から`peeps_v1.0.zip`をダウンロードして解凍する。
         * 解凍もしておく。
         * 好きな場所に置いておく。
             * この場所も大事なので**覚えておくこと**
