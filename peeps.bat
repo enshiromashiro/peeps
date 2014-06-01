@@ -14,15 +14,15 @@ set PEEPS_TWEET_TEMPLATE=dateの成果：num文字
 
 
 @rem 初期化とか
-set SELF_PATH=%~dp0
-set TARGET_PATH=%~dp1
+set SELF_PATH="%~dp0"
+set TARGET_PATH="%~dp1"
 
 echo チェック対象フォルダ:%TARGET_PATH%
 
 @rem 合計計算
 set SUM=0
 for /R %TARGET_PATH% %%f in (*.txt) do @(
-    call :filesize %%f
+    call :filesize "%%f"
     set FSIZE=!ERRORLEVEL!
     set /A SUM=SUM+FSIZE
 )
@@ -59,14 +59,17 @@ goto :eof
 @rem サブルーチン（笑）
 @rem ファイルサイズ
 :filesize
+@rem echo %1 %~z1
 exit /b %~z1
 
 @rem ファイル名生成
 :genfpath
-set FPATH=%1
+set FPATH=%~1
 set FPATH=%FPATH:\=_%
 set FPATH=%FPATH::=_%
-set FPATH=%SELF_PATH%\stats\%FPATH%
+set FPATH=%FPATH: =_%
+set FPATH="%SELF_PATH:"=%\stats\%FPATH%"
+@rem echo %FPATH%
 exit /b
 
 @rem 前回実行時の文字数の更新
@@ -77,8 +80,8 @@ exit /b
 @rem 前回実行時の文字数の探索
 :readstat
 set NUM=-1
-if exist %1 @(
-   for /F %%n in (%1) do @(
+if exist %~1 @(
+   for /F %%n in (%~1) do @(
       set NUM=%%n
    )
 )
