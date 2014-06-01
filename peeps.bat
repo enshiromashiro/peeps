@@ -15,9 +15,26 @@ set PEEPS_TWEET_TEMPLATE=dateの成果：num文字
 
 @rem 初期化とか
 set SELF_PATH="%~dp0"
-set TARGET_PATH="%~dp1"
+set TARGET_PATH=%~1
 
-echo チェック対象フォルダ:%TARGET_PATH%
+@rem 引数のチェック
+if %1str equ str (
+   echo 引数を設定してください
+   echo 使い方: peeps [文字数カウントしたいフォルダ]
+   goto :eof
+)
+
+@rem フォルダ名正規化と存在チェック
+set TMP_PATH=%TARGET_PATH:"=%\+
+set TMP_PATH=%TMP_PATH:\\+=\%
+set TARGET_PATH="%TMP_PATH:\+=\%"
+if not exist %TARGET_PATH% (
+   echo そんなフォルダは存在しません
+   echo カウント対象フォルダ: %TARGET_PATH%
+   goto :eof
+)
+
+echo カウント対象フォルダ:%TARGET_PATH%
 
 @rem 合計計算
 set SUM=0
