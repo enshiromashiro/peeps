@@ -2,15 +2,21 @@
 @setlocal ENABLEDELAYEDEXPANSION
 
 
-@rem 内部設定いろいろ
+@rem twitterクライアント設定
 
 @rem Twitterクライアントのパス
 set PEEPS_TW_PATH=C:\TweetConsole
-@rem Twitterクライアントの引数（最後につぶやき文字列が連結される）
-set PEEPS_TW_CMD=twtcnsl.exe /t
-@rem つぶやきテンプレート
-set PEEPS_TWEET_TEMPLATE=dateの成果：num文字
 
+
+@rem 内部設定いろいろ
+
+@rem Twitterクライアントのコマンド名と引数
+set PEEPS_TW_CMD=twtcnsl.exe
+set PEEPS_TW_ARGS=/t
+
+@rem つぶやきテンプレート
+@rem "date"が日付に、"num"が文字数に置き換わる
+set PEEPS_TWEET_TEMPLATE=dateの成果：num文字
 
 
 @rem 初期化とか
@@ -67,7 +73,7 @@ if -1 == %PREV% (
   echo なのでツイートしません。
 ) else (
   echo %TWEET%
-  %PEEPS_TW_PATH%\%PEEPS_TW_CMD% %TWEET%
+  "%PEEPS_TW_PATH:"=%\%PEEPS_TW_CMD%" %PEEPS_TW_ARGS% %TWEET%
 )
 
 goto :eof
